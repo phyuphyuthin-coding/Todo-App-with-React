@@ -7,6 +7,7 @@ import TodoList from './components/TodoList';
 function App() {
 
   useEffect(() => {
+    console.log('useEffect 2')
     getLocalTodos();
   }, []);
 
@@ -16,6 +17,7 @@ function App() {
   const [filteredTodos, setFilteredTodos] = useState([]);
 
   useEffect(() => {
+    console.log('useEffect 1')
     filterHandler();
     saveLocalTodos();
   }, [todos, status]);
@@ -25,11 +27,11 @@ function App() {
       case 'completed':
         setFilteredTodos(todos.filter(todo => todo.completed === true))
         break;
-      
-      case ('uncompleted'): 
+
+      case ('uncompleted'):
         setFilteredTodos(todos.filter(todo => todo.completed === false))
         break;
-      
+
       default:
         setFilteredTodos(todos);
         break;
@@ -46,8 +48,10 @@ function App() {
       localStorage.setItem('todos', JSON.stringify([]));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem('todos', JSON.stringify(todos)));
-      setTodos(todoLocal);
-      console.log(`Items in localstorage => `+  todoLocal);
+      if (todoLocal) {
+        setTodos(todoLocal);
+      }
+      //console.log(`Items in localstorage => `+  todoLocal);
     }
   }
 
