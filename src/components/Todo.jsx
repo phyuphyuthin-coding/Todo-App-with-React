@@ -14,7 +14,7 @@ const Todo = ({ text, todo, todos, setTodos }) => {
                     ...item, completed: !item.completed
                 }
             }
-            console.log(item);
+            console.log('item => ' + item);
             return item;
         }))
     }
